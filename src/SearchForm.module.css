@@ -1,0 +1,68 @@
+.form {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid lightgrey;
+}
+.form::after {
+  content: "форма поиска";
+  color: grey;
+  font-size: 0.7rem;
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  background-color: white;
+}
+.formSelect {
+  margin-right: 0.5rem;
+}
+.formButton {
+}
+.formInput {
+  margin-right: 0.5rem;
+}
+.formHints {
+  position: absolute;
+  min-width: 200px;
+  border-radius: 10px;
+  background-color: rgba(250, 250, 250, 0.95);
+  z-index: 99;
+  left: 10rem;
+  top: 4rem;
+}
+.formHint {
+  margin: 0;
+  z-index: 100;
+  margin: 0.3rem 1rem;
+}
+.formHint:hover {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+}
+.formLabel {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+@media screen and (max-width: 520px) {
+  .form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .formHints {
+    font-size: 16px;
+    min-width: 300px;
+    left: 0.3rem;
+    top: 5rem;
+  }
+  .formHint {
+    margin: 0;
+    z-index: 100;
+    margin: 0.6rem 1rem;
+  }
+}

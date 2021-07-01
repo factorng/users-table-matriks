@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: auto;
+}
+@media screen and (max-width: 620px) {
+  .app {
+    margin: 0.5rem;
+  }
+}

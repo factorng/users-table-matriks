@@ -1,0 +1,30 @@
+thead th {
+  padding: 0.5rem;
+}
+.sortButton {
+  padding: 0.2rem 2rem;
+  background-color: rgb(240, 240, 240);
+  border: 1px solid grey;
+  width: 8rem;
+  font-weight: bold;
+}
+.sortButton:hover {
+  cursor: pointer;
+}
+.lastCol {
+  width: 2rem;
+}
+@media screen and (max-width: 520px) {
+  .sortButton {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid grey;
+    width: 8rem;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 0;
+    width: 4rem;
+  }
+  thead th {
+    padding: 0.5rem 0.1rem;
+  }
+}

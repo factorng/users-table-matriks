@@ -10,31 +10,52 @@ export default function SearchForm({
   const [selectedField, setSelectedField] = useState("");
   const [fields, setFields] = useState([]);
   const [searchHints, setSearchHints] = useState([]);
+  const [findedUsers, setFindedUsers] = useState([]);
 
   useEffect(() => {
-    setFields([...Object.keys(usersToDisplay[0])]);
-    setSelectedField(Object.keys(usersToDisplay[0])[0]);
-  }, [usersToDisplay]);
+    setFields([...Object.keys(currentUsers[0])]);
+    setSelectedField(Object.keys(currentUsers[0])[0]);
+  }, [currentUsers]);
+
+  const handleShowFindedUsers = React.useCallback(
+    (event) => {
+      if (searchHints && event.key === "Enter") {
+        setUsersToDisplay([...findedUsers]);
+        setSearchHints([]);
+        setInputSearch("");
+      }
+    },
+    [searchHints, findedUsers, setUsersToDisplay]
+  );
 
   useEffect(() => {
-    function handleResetSearch() {
-      setSearchHints([]);
-      setInputSearch("");
+    function handleResetSearch(event) {
+      if (!event.target.className.includes("formHint")) {
+        setSearchHints([]);
+        setInputSearch("");
+      }
     }
     document.addEventListener("click", handleResetSearch);
     return () => document.removeEventListener("click", handleResetSearch);
-  });
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keypress", handleShowFindedUsers);
+    return () =>
+      document.removeEventListener("keypress", handleShowFindedUsers);
+  }, [handleShowFindedUsers]);
 
   const handleSearch = (event) => {
     setInputSearch(event.target.value.toLowerCase());
     const searchQuery = event.target.value.toLowerCase();
 
-    let findedUsers = usersToDisplay.filter((elem) => {
+    const findedUsers = usersToDisplay.filter((elem) => {
       return elem[selectedField].toLowerCase().indexOf(searchQuery) !== -1;
     });
     let hints = findedUsers.map((elem) => elem[selectedField]);
     hints = hints.filter((v, i, a) => a.indexOf(v) === i);
     setSearchHints([...hints]);
+    setFindedUsers([...findedUsers]);
   };
 
   const handleHintClick = (hint) => {
@@ -43,7 +64,7 @@ export default function SearchForm({
     });
     setUsersToDisplay([...selectedData]);
     setSearchHints([]);
-    setInputSearch("");
+    setInputSearch(hint);
   };
   const handleResetFilters = () => {
     setUsersToDisplay([...currentUsers]);
@@ -81,21 +102,23 @@ export default function SearchForm({
       >
         {renderSelect()}
       </select>
-      <input
-        value={inputSearch}
-        onChange={handleSearch}
-        className={styles.formInput}
-      />
-      <div className={styles.formHints}>
-        {searchHints.slice(0, 10).map((hint, key) => (
-          <p
-            className={styles.formHint}
-            key={key}
-            onClick={() => handleHintClick(hint)}
-          >
-            {hint}
-          </p>
-        ))}
+      <div className={styles.inputField}>
+        <input
+          value={inputSearch}
+          onChange={handleSearch}
+          className={styles.formInput}
+        />
+        <div className={styles.formHints}>
+          {searchHints.slice(0, 10).map((hint, key) => (
+            <p
+              className={styles.formHint}
+              key={key}
+              onClick={() => handleHintClick(hint)}
+            >
+              {hint}
+            </p>
+          ))}
+        </div>
       </div>
       <button
         type="button"

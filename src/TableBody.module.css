@@ -27,6 +27,7 @@ tbody tr:hover {
   color: red;
   background-color: transparent;
   font-size: 1rem;
+  cursor: pointer;
 }
 @media screen and (max-width: 470px) {
   td {

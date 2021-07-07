@@ -1,5 +1,4 @@
 .form {
-  position: relative;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -22,8 +21,11 @@
 }
 .formButton {
 }
-.formInput {
+input {
   margin-right: 0.5rem;
+}
+.inputField {
+  position: relative;
 }
 .formHints {
   position: absolute;
@@ -31,8 +33,8 @@
   border-radius: 10px;
   background-color: rgba(250, 250, 250, 0.95);
   z-index: 99;
-  left: 10rem;
-  top: 4rem;
+  left: 0rem;
+  top: 3rem;
 }
 .formHint {
   margin: 0;

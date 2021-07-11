@@ -18,8 +18,10 @@
 }
 .formSelect {
   margin-right: 0.5rem;
+  font-size: 16px;
 }
 .formButton {
+  margin-left: 0.5rem;
 }
 input {
   margin-right: 0.5rem;
@@ -51,10 +53,13 @@ input {
   font-size: 1.5rem;
   font-weight: bold;
 }
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 550px) {
   .form {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .formButton {
+    margin-left: 0;
   }
   .formHints {
     font-size: 16px;

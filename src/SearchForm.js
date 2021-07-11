@@ -5,6 +5,8 @@ export default function SearchForm({
   usersToDisplay,
   setUsersToDisplay,
   currentUsers,
+  handleChange,
+  setUpdateUsers,
 }) {
   const [inputSearch, setInputSearch] = useState("");
   const [selectedField, setSelectedField] = useState("");
@@ -56,6 +58,7 @@ export default function SearchForm({
     hints = hints.filter((v, i, a) => a.indexOf(v) === i);
     setSearchHints([...hints]);
     setFindedUsers([...findedUsers]);
+    setUpdateUsers(false);
   };
 
   const handleHintClick = (hint) => {
@@ -65,9 +68,12 @@ export default function SearchForm({
     setUsersToDisplay([...selectedData]);
     setSearchHints([]);
     setInputSearch(hint);
+    setUpdateUsers(false);
   };
   const handleResetFilters = () => {
     setUsersToDisplay([...currentUsers]);
+    setUpdateUsers(false);
+    handleChange("usersCount", currentUsers.length);
   };
 
   const renderSelect = () => {
@@ -123,7 +129,7 @@ export default function SearchForm({
       <button
         type="button"
         onClick={handleResetFilters}
-        styles={styles.formButton}
+        className={styles.formButton}
       >
         Сбросить фильтры
       </button>

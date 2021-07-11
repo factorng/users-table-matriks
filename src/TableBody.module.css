@@ -29,6 +29,12 @@ tbody tr:hover {
   font-size: 1rem;
   cursor: pointer;
 }
+.controlls {
+  text-align: center;
+}
+.pageButton {
+  margin-right: 1rem;
+}
 @media screen and (max-width: 470px) {
   td {
     padding: 0.2rem;

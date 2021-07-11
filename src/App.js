@@ -10,10 +10,17 @@ const INITIAL_USERS_COUNT = 10;
 
 function App() {
   const [currentUsers, setCurrentUsers] = useState([{}]);
-  const { values, handleChange, errors, isValid, resetForm } =
-    useFormWithValidation();
+  const {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    resetForm,
+    handleChangeValueManually,
+  } = useFormWithValidation();
   const usersCountInputDebounced = useDebounce(values.usersCount, 500, isValid);
   const [usersToDisplay, setUsersToDisplay] = useState([{}]);
+  const [updateUsers, setUpdateUsers] = useState(true);
 
   useEffect(() => {
     resetForm({ usersCount: INITIAL_USERS_COUNT }, { usersCount: "" }, true);
@@ -30,37 +37,38 @@ function App() {
   }, [resetForm]);
 
   useEffect(() => {
-    getUsers(usersCountInputDebounced)
-      .then((users) => {
-        setCurrentUsers(
-          users.map((user) => {
-            const renamedGender =
-              user.gender === "male" ? "мужской" : "женский";
-            return {
-              name: `${user.name.title} ${user.name.first} ${user.name.last}`,
-              gender: renamedGender,
-              email: user.email,
-            };
-          })
-        );
-        setUsersToDisplay(
-          users.map((user) => {
-            const renamedGender =
-              user.gender === "male" ? "мужской" : "женский";
-            return {
-              name: `${user.name.title} ${user.name.first} ${user.name.last}`,
-              gender: renamedGender,
-              email: user.email,
-            };
-          })
-        );
-      })
-      .catch((err) => console.log(err));
+    if (updateUsers)
+      getUsers(usersCountInputDebounced)
+        .then((users) => {
+          setCurrentUsers(
+            users.map((user) => {
+              const renamedGender =
+                user.gender === "male" ? "мужской" : "женский";
+              return {
+                name: `${user.name.title} ${user.name.first} ${user.name.last}`,
+                gender: renamedGender,
+                email: user.email,
+              };
+            })
+          );
+          setUsersToDisplay(
+            users.map((user) => {
+              const renamedGender =
+                user.gender === "male" ? "мужской" : "женский";
+              return {
+                name: `${user.name.title} ${user.name.first} ${user.name.last}`,
+                gender: renamedGender,
+                email: user.email,
+              };
+            })
+          );
+        })
+        .catch((err) => console.log(err));
     localStorage.setItem("usersCount", usersCountInputDebounced);
-  }, [usersCountInputDebounced]);
+  }, [usersCountInputDebounced, updateUsers]);
 
-  // если нет юзеров заглушка "нет пользователей"
   const usersCountHandleChange = (event) => {
+    setUpdateUsers(true);
     handleChange(event);
   };
 
@@ -68,15 +76,21 @@ function App() {
     <div className={styles.app}>
       <AddUsers
         usersCountHandleChange={usersCountHandleChange}
+        handleChange={handleChangeValueManually}
+        setUpdateUsers={setUpdateUsers}
         resetForm={resetForm}
         values={values}
         isValid={isValid}
         errors={errors}
       />
       <Table
+        handleChange={handleChangeValueManually}
+        setUpdateUsers={setUpdateUsers}
         usersToDisplay={usersToDisplay}
         setUsersToDisplay={setUsersToDisplay}
         currentUsers={currentUsers}
+        setCurrentUsers={setCurrentUsers}
+        updateUsers={updateUsers}
       />
     </div>
   );

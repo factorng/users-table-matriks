@@ -7,6 +7,8 @@ export default function TableHeader({
   usersToDisplay,
   setUsersToDisplay,
   currentUsers,
+  setUpdateUsers,
+  handleChange,
 }) {
   const [sortCategory, setSortCategory] = useState("");
 
@@ -20,6 +22,7 @@ export default function TableHeader({
       setSortCategory(categoryName);
       setUsersToDisplay([...usersToDisplay.sort(dynamicSort(categoryName))]);
     }
+    setUpdateUsers(false);
   };
 
   const showArrow = () => {
@@ -40,6 +43,8 @@ export default function TableHeader({
             usersToDisplay={usersToDisplay}
             setUsersToDisplay={setUsersToDisplay}
             currentUsers={currentUsers}
+            setUpdateUsers={setUpdateUsers}
+            handleChange={handleChange}
           />
         </th>
         <th className={styles.lastCol}></th>

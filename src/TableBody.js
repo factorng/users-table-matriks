@@ -1,36 +1,80 @@
 import React from "react";
 import styles from "./TableBody.module.css";
+import usePagination from "./hooks/usePagination";
 
-export default function TableBody({ usersToDisplay, setUsersToDisplay }) {
+const USERS_PER_PAGE = 10;
+
+export default function TableBody({
+  usersToDisplay,
+  setUsersToDisplay,
+  setUpdateUsers,
+  handleChange,
+  setCurrentUsers,
+  updateUsers,
+}) {
+  const {
+    currentPageData,
+    nextPage,
+    prevPage,
+    prevButtonDisabled,
+    nextButtonDisabled,
+  } = usePagination(USERS_PER_PAGE, usersToDisplay, updateUsers);
   const handleRowDelete = (user) => {
     const currentUsersAfterDelete = usersToDisplay.filter(
       (usr) => usr.email !== user.email
     );
-    if (currentUsersAfterDelete.length)
+    if (currentUsersAfterDelete.length) {
       setUsersToDisplay([...currentUsersAfterDelete]);
-    else setUsersToDisplay([{}]);
+      setCurrentUsers([...currentUsersAfterDelete]);
+      setUpdateUsers(false);
+      handleChange("usersCount", currentUsersAfterDelete.length);
+    } else setUsersToDisplay([{}]);
   };
 
   const showData = () => {
     if (Object.keys(usersToDisplay[0]).length) {
       return (
-        <tbody>
-          {usersToDisplay.map((user, i) => (
-            <tr key={i}>
-              <td key={user.name}>{user.name}</td>
-              <td key={user.gender}>{user.gender}</td>
-              <td key={user.email}>{user.email}</td>
-              <td key={i + "delete"} className={styles.lastCol}>
+        <>
+          <tbody>
+            {currentPageData().map((user, i) => (
+              <tr key={i}>
+                <td key={user.name}>{user.name}</td>
+                <td key={user.gender}>{user.gender}</td>
+                <td key={user.email}>{user.email}</td>
+                <td key={i + "delete"} className={styles.lastCol}>
+                  <button
+                    onClick={() => {
+                      handleRowDelete(user);
+                    }}
+                    className={styles.deleteButton}
+                  >
+                    X
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan="4" className={styles.controlls}>
                 <button
-                  onClick={() => handleRowDelete(user)}
-                  className={styles.deleteButton}
+                  onClick={() => prevPage()}
+                  className={styles.pageButton}
+                  disabled={prevButtonDisabled()}
                 >
-                  X
+                  Предыдущая стр
+                </button>
+                <button
+                  onClick={() => nextPage()}
+                  className={styles.pageButton}
+                  disabled={nextButtonDisabled()}
+                >
+                  Следующая стр
                 </button>
               </td>
             </tr>
-          ))}
-        </tbody>
+          </tfoot>
+        </>
       );
     } else
       return (

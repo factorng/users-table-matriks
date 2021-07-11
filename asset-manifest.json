@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/users-table-matriks/static/css/main.8c976009.chunk.css",
-    "main.js": "/users-table-matriks/static/js/main.ade77335.chunk.js",
-    "main.js.map": "/users-table-matriks/static/js/main.ade77335.chunk.js.map",
+    "main.css": "/users-table-matriks/static/css/main.c0644347.chunk.css",
+    "main.js": "/users-table-matriks/static/js/main.9219de2b.chunk.js",
+    "main.js.map": "/users-table-matriks/static/js/main.9219de2b.chunk.js.map",
     "runtime-main.js": "/users-table-matriks/static/js/runtime-main.06bbb59b.js",
     "runtime-main.js.map": "/users-table-matriks/static/js/runtime-main.06bbb59b.js.map",
-    "static/js/2.482bd20b.chunk.js": "/users-table-matriks/static/js/2.482bd20b.chunk.js",
-    "static/js/2.482bd20b.chunk.js.map": "/users-table-matriks/static/js/2.482bd20b.chunk.js.map",
+    "static/js/2.b72ac716.chunk.js": "/users-table-matriks/static/js/2.b72ac716.chunk.js",
+    "static/js/2.b72ac716.chunk.js.map": "/users-table-matriks/static/js/2.b72ac716.chunk.js.map",
     "index.html": "/users-table-matriks/index.html",
-    "static/css/main.8c976009.chunk.css.map": "/users-table-matriks/static/css/main.8c976009.chunk.css.map",
-    "static/js/2.482bd20b.chunk.js.LICENSE.txt": "/users-table-matriks/static/js/2.482bd20b.chunk.js.LICENSE.txt"
+    "static/css/main.c0644347.chunk.css.map": "/users-table-matriks/static/css/main.c0644347.chunk.css.map",
+    "static/js/2.b72ac716.chunk.js.LICENSE.txt": "/users-table-matriks/static/js/2.b72ac716.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.06bbb59b.js",
-    "static/js/2.482bd20b.chunk.js",
-    "static/css/main.8c976009.chunk.css",
-    "static/js/main.ade77335.chunk.js"
+    "static/js/2.b72ac716.chunk.js",
+    "static/css/main.c0644347.chunk.css",
+    "static/js/main.9219de2b.chunk.js"
   ]
 }
